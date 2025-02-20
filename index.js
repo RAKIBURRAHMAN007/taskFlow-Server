@@ -53,6 +53,13 @@ async function run() {
         const result = await taskCollection.deleteOne(query);
         res.send(result);
     })
+    app.patch('/taskUpdate/:id',async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)};
+        const updateData = { $set: req.body };
+        const result = await taskCollection.updateOne(query,updateData);
+        res.send(result)
+    })
     app.put('/tasks/:id', async (req, res) => {
         const id = new ObjectId(req.params.id); 
         const  {category}  = req.body;  
