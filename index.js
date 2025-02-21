@@ -62,13 +62,13 @@ async function run() {
     })
     app.put('/tasks/:id', async (req, res) => {
         const id = new ObjectId(req.params.id); 
-        const  {category}  = req.body;  
+        const  {category,time}  = req.body;  
   
         try {
           
           const result = await taskCollection.updateOne(
             { _id: new ObjectId(id) },  
-            { $set: { category: category } }  
+            { $set: { category: category ,time: time} }  
           );
   
           if (result.matchedCount === 0) {
